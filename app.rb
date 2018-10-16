@@ -1,12 +1,27 @@
 class Game
   #Maitre du jeu
   def initialize
+    @@answer = " "
+    joueur1 = Player.new(1)
+    joueur2 = Player.new(2)
+    plateau = Board.new()
+    joueur1.set_name
+    joueur2.set_name
+    plateau.create_board_cases
+
+    while #@@answer joueur1 or joueur2 .alignement
+
+    puts "#{joueur1.get_name} à votre tour"
+    play
+    puts "#{joueur2.get_name} à votre tour"
+    play
+    #END
+    end
+
 
   end
 
-  def launch_new_game
 
-  end
 
   def winner_looser
     #va voir dans le board qui a gagner
@@ -14,15 +29,13 @@ class Game
     #renvoie le nom du joueur
   end
 
-  def action
-    joueur1 = Player.new(1)
-    joueur2 = Player.new(2)
-    plateau = Board.new()
-  end
+
 
   def play
-    puts "Ou voulez vous jouez ?"
-    answer = gets.chomp()
+  #rattacher une image du plateau avec coordonée
+    puts "Où voulez vous jouez ?"
+    @answer = gets.chomp()
+
 
 
     #Demande du placement de symboles
@@ -38,15 +51,18 @@ end
 class Player
  def initialize(number)
    @number = number
-   @name = "a"
+   @name
  end
 
 
 
  def set_name
-   puts "Quel est le nom du joueur"
+   puts "Quel est le nom du joueur #{@number}"
    @name = gets.chomp()
  end
+
+
+
 
  def get_name
    return @name
@@ -74,31 +90,37 @@ class Board
     end
   end
 
+  def player_choice
+    
+
+  end
+
+
   def alignement
     @tab = @cases.map { |e| e.get_remplissage  }
-    if  tab[0] == tab[3] && tab[3] == tab[6] && tab[0] !=""
-      return @cases.map { |e| e.get_remplissage.get_player }[0]
+    if  @tab[0] == @tab[3] && @tab[3] == @tab[6] && @tab[0] !=""
+      return @cases.map { |e| e.get_player }[0]
     end
-    if  tab[1] == tab[4] && tab[4] == tab[7]  && tab[1] !=""
-      return @cases.map { |e| e.get_remplissage.get_player }[1]
+    if  @tab[1] == @tab[4] && @tab[4] == @tab[7]  && @tab[1] !=""
+      return @cases.map { |e| e.get_player }[1]
     end
-    if  tab[2] == tab[5] && tab[5] == tab[8] && tab[2] !=""
-      return @cases.map { |e| e.get_remplissage.get_player }[2]
+    if  @tab[2] == @tab[5] && @tab[5] == @tab[8] && @tab[2] !=""
+      return @cases.map { |e| e.get_player }[2]
     end
-    if  tab[0] == tab[1] && tab[1] == tab[2] && tab[0] !=""
-      return @cases.map { |e| e.get_remplissage.get_player }[0]
+    if  @tab[0] == @tab[1] && @tab[1] == @tab[2] && @tab[0] !=""
+      return @cases.map { |e| e.get_player }[0]
     end
-    if  tab[3] == tab[4] && tab[4] == tab[5] && tab[3] !=""
-      return @cases.map { |e| e.get_remplissage.get_player }[3]
+    if  @tab[3] == @tab[4] && @tab[4] == @tab[5] && @tab[3] !=""
+      return @cases.map { |e| e.get_player }[3]
     end
-    if  tab[6] == tab[7] && tab[7] == tab[8] && tab[6] !=""
-      return @cases.map { |e| e.get_remplissage.get_player }[6]
+    if  @tab[6] == @tab[7] && @tab[7] == @tab[8] && @tab[6] !=""
+      return @cases.map { |e| e.get_player }[6]
     end
-    if  tab[0] == tab[4] && tab[4] == tab[8] && tab[0] !=""
-      return @cases.map { |e| e.get_remplissage.get_player }[0]
+    if  @tab[0] == @tab[4] && @tab[4] == @tab[8] && @tab[0] !=""
+      return @cases.map { |e| e.get_player }[0]
     end
-    if  tab[2] == tab[4] && tab[4] == tab[6]
-      return @cases.map { |e| e.get_remplissage.get_player }[2]
+    if  @tab[2] == @tab[4] && @tab[4] == @tab[6]
+      return @cases.map { |e| e.get_player }[2]
     end
 
   end
@@ -126,10 +148,10 @@ class BoardCase
   end
 
 def get_player
-  if @remplissage = x
+  if @remplissage == "x"
     return 1
   end
-  if @remplissage = o
+  if @remplissage == "o"
     return 2
   end
 end
@@ -147,7 +169,3 @@ end
 
 
 jeu = Game.new
-puts jeu
-p tests = Board.new
-p tests.create_board_cases
-p tests.alignement
