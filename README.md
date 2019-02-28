@@ -1,4 +1,4 @@
-Projet réalisé en pair programming par Eric et Marc(le beau gosse)
+Projet réalisé en pair programming par Eric et Marc
 
 Il s'agit d'un programme en POO qui permet de jouer au morpion.
 Il se divise en 4 classes chacunes divisées en méthodes selon l'archiectrue suivante :
